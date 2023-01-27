@@ -1,23 +1,49 @@
 version: '3'
 services:
-  mongo:
-    image: mongo:3.6.5
-    volumes:
-      - mongo-data:/data/db
-    ports:
-      - "27017:27017"
+#  mongo:
+#    image: mongo:3.6.5
+#    volumes:
+#      - mongo-data:/data/db
+#    ports:
+#      - "27108:27017"
+#  rabbitmq:
+#    image: rabbitmq:3-management
+#    hostname: my-rabbit
+#    ports:
+#      - "5682:5672"
+#      - "15682:15682"
+#    volumes:
+#      - rabbitmq_log:/var/log/rabbitmq
+#      - rabbitmq_data:/var/lib/rabbitmq/mnesia/rabbit@my-rabbit
+#      - ./dev/rabbitmq-config:/etc/rabbitmq
+
   rabbitmq:
-    image: rabbitmq:3-management
-    hostname: my-rabbit
+    image: "rabbitmq:3-management"
     ports:
-      - "5672:5672"
-      - "15672:15672"
+      - "5682:5672"
+      - "15682:15672"
     volumes:
       - rabbitmq_log:/var/log/rabbitmq
       - rabbitmq_data:/var/lib/rabbitmq/mnesia/rabbit@my-rabbit
       - ./dev/rabbitmq-config:/etc/rabbitmq
+    networks:
+      - dexi-gateway
+    restart: unless-stopped
+  mongodb:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - '27027:27017'
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - dexi-gateway
+
   app:
-    build: 
+    build:
       context: .
       dockerfile: Dockerfile.dev
     image: gamification:dev
@@ -26,12 +52,18 @@ services:
     ports:
       - "3030:3030"
     depends_on:
-      - mongo
+      - mongodb
       - rabbitmq
     environment:
-      - MONGO_URL=mongodb://mongo/gamification
+      - MONGO_URL=mongodb://root:example@mongodb/gamification?authSource=admin
       - RABBITMQ_HOST=rabbitmq
+    networks:
+      - dexi-gateway
 volumes:
-  mongo-data:
+  mongodb_data:
   rabbitmq_log:
   rabbitmq_data:
+
+networks:
+  dexi-gateway:
+    driver: overlay
