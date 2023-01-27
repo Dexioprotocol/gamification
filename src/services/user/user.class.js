@@ -21,6 +21,7 @@ class Service {
         user_id: id
       }
     })).filter(achievement => {
+
       const achievementRule = rules['achievements'].find(rule => {
         return rule.name === achievement.name;
       });
@@ -44,9 +45,9 @@ class Service {
       };
     });
 
-    let level = 1;
+    const level = 1;
 
-    if(xp.length) {
+    /*if(xp.length) {
       const currentXP = xp.find(x => x['name'] === 'XP')['amount'];
       let value = 0;
 
@@ -75,7 +76,7 @@ class Service {
         default:
           throw new Error('Levels Type should be one of "manual", "linear" or "exponential"');
       }
-    }
+    }*/
 
     return {
       user_id: id,

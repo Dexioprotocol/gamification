@@ -1,0 +1,93 @@
+XPs:
+  - walked
+  - bounties_collected
+#  - bounties_redeemed
+  - level
+
+events:
+  KMWalkedCompleted:
+    actions:
+      - xp:
+          name: walked
+          amount: 1
+  BountyCollected:
+    actions:
+      - xp:
+          name: bounties_collected
+          amount: 1
+achievements:
+  KMWalked:
+    requirements:
+      - xp:
+          name: walked
+          amount: 1
+  3KMWalked:
+    requirements:
+      - event:
+          name: KMWalkedCompleted
+          amount: 3
+    actions:
+      - xp:
+          name: level
+          amount: 1
+    scope: [user, context.assignment_id]
+  5KMWalked:
+    requirements:
+      - event:
+          name: KMWalkedCompleted
+          amount: 5
+    actions:
+      - xp:
+          name: level
+          amount: 1
+    scope: [user, context.assignment_id]
+  LegendaryStatus:
+    requirements:
+      - event:
+          name: KMWalkedCompleted
+          amount: 8
+      - event:
+          name: BountyCollected
+          amount: 8
+    replaces: [ EpicStatus, RareStatus, UncommonStatus, CommonStatus ]
+    scope: [user, context.assignment_id]
+  EpicStatus:
+    requirements:
+      - event:
+          name: KMWalkedCompleted
+          amount: 6
+      - event:
+          name: BountyCollected
+          amount: 6
+    replaces: [ RareStatus, UncommonStatus, CommonStatus ]
+    scope: [user, context.assignment_id]
+  RareStatus:
+    requirements:
+      - event:
+          name: KMWalkedCompleted
+          amount: 4
+      - event:
+          name: BountyCollected
+          amount: 4
+    replaces: [ UncommonStatus, CommonStatus ]
+    scope: [user, context.assignment_id]
+  UncommonStatus:
+    requirements:
+      - event:
+          name: KMWalkedCompleted
+          amount: 2
+      - event:
+          name: BountyCollected
+          amount: 2
+    replaces: [CommonStatus]
+    scope: [user, context.assignment_id]
+  CommonStatus:
+    requirements:
+      - event:
+          name: KMWalkedCompleted
+          amount: 1
+      - event:
+          name: BountyCollected
+          amount: 1
+    scope: [user, context.assignment_id]
+#// Common, Uncommon, Rare, Epic, Legendary
