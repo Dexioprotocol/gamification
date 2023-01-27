@@ -55,8 +55,8 @@ services:
       - mongodb
       - rabbitmq
     environment:
-      - MONGO_URL=mongodb://root:example@mongodb:27027/gamification?authSource=admin
-      - RABBITMQ_HOST=rabbitmq:5682
+      - MONGO_URL=mongodb://root:example@mongodb:27017/gamification?authSource=admin
+      - RABBITMQ_HOST=rabbitmq:5672
     networks:
       - dexi-gateway
 volumes:
