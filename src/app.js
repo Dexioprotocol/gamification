@@ -55,6 +55,6 @@ app.use(express.errorHandler({ logger }));
 
 app.hooks(appHooks);
 
-app.set('rules', require('./rule-parser')(path.join(__dirname, '..', 'config', 'dexi-hunter-minimal.yml')));
+app.set('rules', require('./rule-parser')(path.join(__dirname, '..', 'config', 'dexi-dragons-minimal.yml')));
 
 module.exports = app;

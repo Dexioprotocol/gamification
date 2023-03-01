@@ -1,0 +1,21 @@
+XPs:
+  - matches
+  - dragonsXP
+
+events:
+  MatchCompleted:
+    actions:
+      - xp:
+          name: matches
+          amount: 1
+achievements:
+  Played2Matches:
+    requirements:
+      - xp:
+          name: matches
+          amount: 2
+    actions:
+      - xp:
+          name: dragonsXP
+          amount: 50
+    scope: [user, context.assignment_id]

@@ -11,7 +11,7 @@ async function cleanDatabase(app) {
 }
 
 
-describe.only('\'dexi achievement-rule-checker\' hook', () => {
+describe('\'dexi achievement-rule-checker\' hook', () => {
 
   let app;
   const user_id = 'TestUser';
