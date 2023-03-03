@@ -8,7 +8,7 @@
   },
   "mongodb": "mongodb://root:example@mongodb:27027/gamification?authSource=admin",
   "rabbitmq": "rabbitmq:5682",
-  "rabbitQueue": "my-queue",
+  "rabbitQueue": "GAMIFICATION",
   "rabbitExchange": "my-exchange",
   "rabbitRoutingKey": "my-key"
 }
