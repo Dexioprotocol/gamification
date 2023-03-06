@@ -61,8 +61,16 @@ class AmqpConnector {
       });
       this.channel.consume(queue,
         (msg) => {
-          logger.info('receiveFromQueue', msg.content);
-          this.app.service('events').create(JSON.parse(msg.content));
+          const content = JSON.parse(msg.content);
+          const data = JSON.parse(content.data);
+          logger.info('JSON receiveFromQueue', {queue, data});
+
+          const message = {
+            'name': data.name,
+            'user_id': data.user_id
+          };
+          console.log(message);
+          this.app.service('events').create(message);
         }, {
           noAck: true
         }
