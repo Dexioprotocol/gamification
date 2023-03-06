@@ -6,7 +6,7 @@
     "default": 10,
     "max": 50
   },
-  "mongodb": "mongodb://root:example@mongodb:27027/gamification?authSource=admin",
+  "mongodb": "mongodb://root:example@mongodb:27017/gamification?authSource=admin",
   "rabbitmq": "rabbitmq:5682",
   "rabbitQueue": "GAMIFICATION",
   "rabbitExchange": "topic_orders",
