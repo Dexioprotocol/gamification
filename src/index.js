@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
-const logger = require('winston');
+//const logger = require('winston');
+const logger = require('./middleware/logger');
+
 const app = require('./app');
 const AmqpConnector = require('./amqp-connector.js');
 const port = app.get('port');

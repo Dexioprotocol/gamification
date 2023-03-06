@@ -1,4 +1,6 @@
-const logger = require('winston');
+//const logger = require('winston');
+const logger = require('./middleware/logger');
+
 const amqp = require('amqplib');
 
 class AmqpConnector {
